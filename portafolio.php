@@ -1,68 +1,32 @@
-<?php include("cabecera.php"); ?>
+<?php include("includes/cabecera.php"); ?>
 <?php include("conexion.php"); ?>
 <?php 
-if($_POST){
-	
-	$nombre=$_POST['proyecto'];
-	$descripcion=$_POST['descripcion'];
-
-	$fecha= new DateTime();
-
-	$imagen=$fecha->getTimeStamp()."_".$_FILES['imagen']['name'];
-
-	$imagen_temporal=$_FILES['imagen']['tmp_name'];
-
-	move_uploaded_file($imagen_temporal,"imagenes/".$imagen);
-
-	$objConexion=new conexion();
-	$sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) VALUES (NULL, '$nombre', '$imagen', '$descripcion');";
-	$objConexion->ejecutar($sql);
-
-	header('location:portafolio.php');
-}
-
-if($_GET){
-	$id=$_GET['borrar'];
-	$objConexion=new conexion();
-
-	//eliminar imagen de la carpeta "imagenes"
-	$imagen=$objConexion->consultar("SELECT imagen FROM proyectos WHERE id=".$id);
-	unlink("imagenes/".$imagen[0]["imagen"]);
-
-	//eliminar registro de la base de datos
-	$sql="DELETE FROM `proyectos` WHERE `proyectos`.`id`=".$id;
-	$objConexion->ejecutar($sql);
-
-	header('location:portafolio.php');
-}
-
+//Consultar datos de tabla proyectos
 $objConexion=new conexion();
 $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
-
 ?>
 
 <br/>
 <div class="container">
 	<div class="row">
-		<div class="col-md-6">
-
+		<div class="col-md-4">
 			<div class="card">
   				<div class="card-body">
     				<h5 class="card-title">Registrar proyecto</h5>
 					<br/>
-					<form action="portafolio.php" method="post" enctype="multipart/form-data" >
-						Nombre del proyecto: <input required class="form-control" type="text" name="proyecto">
+					<form action="create.php" method="post" enctype="multipart/form-data" >
+						Nombre del proyecto: <input required class="form-control" type="text" name="proyecto" autofocus>
 						<br/>
 						Imagen: <input required class="form-control" type="file" name="imagen">
 						<br/>
 						Descripción: <textarea required class="form-control" rows="3" name="descripcion"></textarea>
 						<br/>
-						<input class="btn btn-success" type="submit" value="Crear proyecto">
+						<input class="btn btn-success btn-block" type="submit" value="Crear proyecto">
 					</form>
   				</div>
 			</div>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-8">
 			<table class="table">
   				<thead>
     				<tr>
@@ -82,7 +46,14 @@ $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
 							<img width="120" src="imagenes/<?php echo $proyecto['imagen']; ?>" alt="imagen-proyecto"></td>
 							
       					<td><?php echo $proyecto['descripcion']; ?></td>
-						<td><a class="btn btn-danger" href="?borrar=<?php echo $proyecto['id']; ?>">Eliminar</a></td>
+						<td>
+							<a class="btn btn-secondary" href="edit.php?actualizar=<?php echo $proyecto['id']; ?>">
+								<i class="bi bi-pencil-square"></i>
+							</a>
+							<a class="btn btn-danger" href="delete.php?borrar=<?php echo $proyecto['id']; ?>">
+								<i class="bi bi-trash"></i>
+							</a>
+						</td>
     				</tr>
 					<?php } ?>
   				</tbody>
@@ -90,4 +61,4 @@ $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
 		</div>
 	</div>
 </div>
-<?php include('pie.php'); ?>
+<?php include('includes/pie.php'); ?>

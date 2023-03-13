@@ -1,4 +1,4 @@
-<?php include("cabecera.php"); ?>
+<?php include("includes/cabecera.php"); ?>
 <?php include("conexion.php"); ?>
 <?php
 $objConexion=new conexion();
@@ -20,7 +20,7 @@ $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
 <?php foreach($proyectos as $proyecto){ ?>
   <div class="col">
     <div class="card">
-      <img src="imagenes/<?php echo $proyecto['imagen']; ?>" class="card-img-top" alt="...">
+      <img src="imagenes/<?php echo $proyecto['imagen']; ?>" class="card-img-top">
       <div class="card-body">
         <h5 class="card-title"><?php echo $proyecto['nombre']; ?></h5>
         <p class="card-text"><?php echo $proyecto['descripcion']; ?></p>
@@ -31,4 +31,4 @@ $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
 
 </div>
 
-<?php include("pie.php"); ?>
+<?php include("includes/pie.php"); ?>
