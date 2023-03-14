@@ -7,11 +7,8 @@ if($_POST){
 	$descripcion=$_POST['descripcion'];
 
 	$fecha= new DateTime();
-
 	$imagen=$fecha->getTimeStamp()."_".$_FILES['imagen']['name'];
-
 	$imagen_temporal=$_FILES['imagen']['tmp_name'];
-
 	move_uploaded_file($imagen_temporal,"imagenes/".$imagen);
 
 	$objConexion=new conexion();

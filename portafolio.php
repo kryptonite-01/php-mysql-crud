@@ -4,6 +4,7 @@
 //Consultar datos de tabla proyectos
 $objConexion=new conexion();
 $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
+
 ?>
 
 <br/>
@@ -17,7 +18,9 @@ $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
 					<form action="create.php" method="post" enctype="multipart/form-data" >
 						Nombre del proyecto: <input required class="form-control" type="text" name="proyecto" autofocus>
 						<br/>
-						Imagen: <input required class="form-control" type="file" name="imagen">
+						Imagen: <input required onchange="preview()" class="form-control" type="file" name="imagen">
+						<br/>
+						<img width="120" id="thumb">
 						<br/>
 						Descripción: <textarea required class="form-control" rows="3" name="descripcion"></textarea>
 						<br/>
@@ -44,13 +47,12 @@ $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
       					<td><?php echo $proyecto['nombre']; ?></td>
       					<td>
 							<img width="120" src="imagenes/<?php echo $proyecto['imagen']; ?>" alt="imagen-proyecto"></td>
-							
       					<td><?php echo $proyecto['descripcion']; ?></td>
 						<td>
-							<a class="btn btn-secondary" href="edit.php?actualizar=<?php echo $proyecto['id']; ?>">
+							<a class="btn btn-secondary" href="edit.php?id=<?php echo $proyecto['id']; ?>">
 								<i class="bi bi-pencil-square"></i>
 							</a>
-							<a class="btn btn-danger" href="delete.php?borrar=<?php echo $proyecto['id']; ?>">
+							<a class="btn btn-danger" href="delete.php?id=<?php echo $proyecto['id']; ?>">
 								<i class="bi bi-trash"></i>
 							</a>
 						</td>

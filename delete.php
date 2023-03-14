@@ -1,9 +1,10 @@
 <?php 
-
 include("conexion.php");
 
 if($_GET){
-	$id=$_GET['borrar'];
+	echo "<script>alert('Seguro que desea eliminar la informacion?')</script>";
+
+	$id=$_GET['id'];
 	$objConexion=new conexion();
 
 	//eliminar imagen de la carpeta "imagenes"
