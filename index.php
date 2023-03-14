@@ -9,12 +9,9 @@ $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
   <h2>Bienvenid@s</h2>
   <p>Este es un portafolio privado</p>
   <hr class="my-4" />
-  <button type="button" class="btn btn-primary">
-    Mas información
-  </button>
 </div>
 <!-- Jumbotron -->
-
+<br/>
 <div class="row row-cols-1 row-cols-md-3 g-4">
 
 <?php foreach($proyectos as $proyecto){ ?>

@@ -51,7 +51,7 @@
                     </div>
                     <div class="mb-3">
                         Imagen:
-                        <input onchange="preview()" class="form-control" type="file" name="imagen">
+                        <input onchange="preview()" class="form-control" type="file" name="imagen" required>
                         <br/>
                         <img width="120" src="imagenes/<?php echo $imagen; ?>" id="thumb">
                     </div>
