@@ -1,6 +1,7 @@
 <?php include("includes/cabecera.php"); ?>
 <?php include("conexion.php"); ?>
 <?php 
+
 //Consultar datos de tabla proyectos
 $objConexion=new conexion();
 $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
@@ -28,6 +29,14 @@ $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
 					</form>
   				</div>
 			</div>
+			<br/>
+			<?php if (isset($_SESSION['message'])) { ?>
+				<div class="alert alert-<?php echo $_SESSION['message_type'];?> alert-dismissible fade show" role="alert">
+					<?php echo $_SESSION['message']; ?>
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			<?php unset($_SESSION['message']);
+				  unset($_SESSION['message_type']); } ?>
 		</div>
 		<div class="col-md-8">
 			<table class="table">
@@ -63,4 +72,6 @@ $proyectos=$objConexion->consultar("SELECT * FROM `proyectos`");
 		</div>
 	</div>
 </div>
+
+
 <?php include('includes/pie.php'); ?>

@@ -1,5 +1,6 @@
 <?php
 include("conexion.php");
+session_start();
 
 if($_POST){
 	
@@ -14,6 +15,9 @@ if($_POST){
 	$objConexion=new conexion();
 	$sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) VALUES (NULL, '$nombre', '$imagen', '$descripcion');";
 	$objConexion->ejecutar($sql);
+
+	$_SESSION['message'] = 'Proyecto creado exitosamente.';
+  	$_SESSION['message_type'] = 'success';
 
 	header('location:portafolio.php');
 }

@@ -1,5 +1,7 @@
+<?php include("includes/cabecera.php"); ?>
 <?php 
     include("conexion.php");
+
     //consultar registro que se va a actualizar
     if($_GET) {
         $id = $_GET['id'];
@@ -30,11 +32,13 @@
         $objConexion=new conexion();
         $objConexion->ejecutar($sql);
 
+        $_SESSION['message'] = 'Proyecto modificado exitosamente.';
+        $_SESSION['message_type'] = 'warning';
+
         header('location:portafolio.php');
     }
 ?>
 
-<?php include("includes/cabecera.php"); ?>
 <div class="row">
     <div class="col-md-4 mx-auto">
         <div class="card">
@@ -47,7 +51,7 @@
                     </div>
                     <div class="mb-3">
                         Imagen:
-                        <input required onchange="preview()" class="form-control" type="file" name="imagen">
+                        <input onchange="preview()" class="form-control" type="file" name="imagen">
                         <br/>
                         <img width="120" src="imagenes/<?php echo $imagen; ?>" id="thumb">
                     </div>
